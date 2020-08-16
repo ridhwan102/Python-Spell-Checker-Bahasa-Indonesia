@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Spell Checker</title>
+    <style type="text/css">
+      body,textarea,td
+      {
+        font-family: roboto;
+      }
+      textarea,td
+      {
+        font-size: 16px;
+      }
+      .inputan 
+      {
+        width: 100%;
+        margin: 8px 0;
+        height: 100px;
+        box-sizing: border-box;
+        resize: none;
+        border: 1px solid #9BD770;
+        border-radius: 5px;
+      }
+      .kotakan
+      {
+        color: #1B3409;
+        width: 80%;
+        padding: 20px;
+        margin: auto;
+        margin-top: 20px;
+        background-color: #EBF7E3;
+        border: 1px solid #9BD770;
+        border-radius: 10px;
+        box-shadow: 3px 3px 6px #1B3409;
+      }
+      .button 
+      {
+        background-color: #9BD770; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+      .button2 
+      {
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #9BD770;
+        border-radius: 5px;
+      }
+      .button2:hover 
+      {
+        background-color: white;
+        color: black;
+      }
+      table
+      {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td
+      {
+        text-align: left;
+        padding: 8px;
+      }
+      tr:nth-child(even){background-color: #f2f2f2}
+      th 
+      {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .footer 
+      {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+}
+    </style>
+  </head>
+ 
+  <body bgcolor="#9BD770">
+      <div class="kotakan">
+        <h1>Optimised DLD Spell Checker</h1>
+        <form action="{{ url_for('periksa')}}" method="POST">
+        <textarea id="inputan" class="inputan" name="inputan">
+{% for key, key2 in kalimat.items() %}{{key}} {%endfor%}</textarea>
+         <br/>
+        <button type="submit" class="button button2">Periksa Kata</button>
+      </form>
+
+      <form action="{{ url_for('buka_file')}}" method="POST">
+        <button type="submit" class="button button2" style="float: right;margin-top: -55px;">Buka File .txt</button>
+      </form>
+      </div>
+       <div class="kotakan">
+      <h1>Hasil Pemeriksaan Kata</h1>
+      <table>
+        <tr>
+          <th style="width: 20%">Kata yang salah</th>
+          <th>Saran kata</th>
+        </tr>
+          {% for key, key2 in hasil.items() %} 
+        <tr>
+          <td>{{key}}</td>
+          <td>{% for kata in key2 %} {{kata}} {%endfor%}</td>
+        </tr>
+          {%endfor%}
+
+      </table>
+      </div>
+
+      <br>
+      <div class="footer">
+      {{ waktu }}
+      </div>
+      
+  </body>
+</html>
